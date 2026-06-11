@@ -2,9 +2,9 @@
 
 ## Información del Estudiante
 
-- **Nombre:** [Tu nombre completo aquí]
-- **Carrera:** [Tu carrera]
-- **Fecha de inicio:** [Fecha]
+- **Nombre:** Leonardo David Falconi Velastegui
+- **Carrera:** Tecnología Superior En Desarrollo De Software
+- **Fecha de inicio:** 11/06/2026
 
 ---
 
