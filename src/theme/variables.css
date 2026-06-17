@@ -1,2 +1,100 @@
 /* For information on how to create your own theme, please refer to:
 http://ionicframework.com/docs/theming/ */
+/* src/theme/variables.css */
+
+:root {
+
+  /* Colores principales */
+  --ion-color-primary: #2563eb;
+  --ion-color-primary-rgb: 37, 99, 235;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: #2158cf;
+  --ion-color-primary-tint: #3b73ed;
+
+  --ion-color-secondary: #06b6d4;
+  --ion-color-secondary-rgb: 6, 182, 212;
+
+  --ion-color-success: #22c55e;
+  --ion-color-warning: #f59e0b;
+  --ion-color-danger: #ef4444;
+
+  /* Fondo general */
+  --ion-background-color: #f4f6f9;
+  --ion-background-color-rgb: 244, 246, 249;
+
+  /* Texto */
+  --ion-text-color: #1f2937;
+  --ion-text-color-rgb: 31, 41, 55;
+
+  /* Tarjetas */
+  --app-card-bg: #ffffff;
+  --app-card-radius: 16px;
+  --app-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* Inputs */
+  --app-input-radius: 14px;
+
+  /* Espaciado */
+  --app-padding: 16px;
+}
+
+/* Toolbar global */
+ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+}
+
+/* Títulos */
+ion-title {
+  font-weight: 600;
+}
+
+/* Fondo de todas las páginas */
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+/* Listas */
+ion-list {
+  background: transparent;
+}
+
+/* Tarjetas */
+ion-card {
+  border-radius: var(--app-card-radius);
+  box-shadow: var(--app-card-shadow);
+  overflow: hidden;
+}
+
+/* Inputs */
+ion-input,
+ion-textarea {
+  --background: white;
+  border-radius: var(--app-input-radius);
+  margin-top: 8px;
+}
+
+/* Botones */
+ion-button {
+  --border-radius: 14px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* Items de listas */
+ion-item {
+  --background: white;
+  margin-bottom: 10px;
+  border-radius: 12px;
+}
+
+/* Imágenes dentro de cards */
+ion-card img {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Animación suave */
+* {
+  transition: 0.2s ease;
+}
