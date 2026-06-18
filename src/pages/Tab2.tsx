@@ -6,40 +6,39 @@ const Tab2: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Crear Repositorio</IonTitle>
+          <IonTitle>Formulario del repositorio</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
+            <IonTitle size="large">Formulario de Repositorio</IonTitle>
           </IonToolbar>
         </IonHeader>
+
         <div className="form-container">
           <IonInput
-            className="form-field"
-            label="Nombre del repositorio"
-            labelPlacement="floating"
-            placeholder="Ingrese el nombre del repositorio"
-          />
-          <IonTextarea
-            className="form-field"
-            label="Descripcion del repositorio"
-            labelPlacement="floating"
-            placeholder="Ingrese la descripcion del repositorio"
-            rows={6}
-          />
-          <IonButton
-            className="form-field"
-            expand="block"
-            shape="round"
-            color="primary"
-          >
-            Guardar
-
-          </IonButton>
-        </div>
-
+          className="form-field"
+          label="Nombre del repositorio"
+          labelPlacement="floating"
+          placeholder="Ingrese el nombre del repositorio"
+        />
+        <IonTextarea
+        className='form-field'
+        label='Descripción del repositorio'
+        labelPlacement='floating'
+        placeholder='Ingrese la descripción del repositorio'
+        rows={6}
+        />
+        <IonButton
+          className='form-field'
+          expand='block'
+          color="dark"
+          shape="round"
+        >
+          Guardar
+        </IonButton>
+      </div>
       </IonContent>
     </IonPage>
   );

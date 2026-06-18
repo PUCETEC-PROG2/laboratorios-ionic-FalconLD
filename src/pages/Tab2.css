@@ -5,10 +5,12 @@
     justify-content: center;
     align-items: center;
     gap: 32px;
-    padding: 24px;
+    padding: 24px; 
+
 }
 
-.form-field {
-    width: 100;
+.form-field{
+    width: 100%;
 
+    
 }
