@@ -1,13 +1,7 @@
 import axios from "axios";
 import { Repository } from "../interfaces/Repository";
 import { GithubUser } from "../interfaces/GithubUser";
-
-// Asegúrate de tener esta interfaz creada o importada correctamente
-interface RepositoryPayload {
-  name: string;
-  description?: string;
-  private?: boolean;
-}
+import { RepositoryPayload } from "../interfaces/RepositoryPayload";
 
 const GITHUB_API_URL = import.meta.env.VITE_GITHUB_API_URL || "https://api.github.com";
 const GITHUB_API_TOKEN = import.meta.env.VITE_GITHUB_API_TOKEN;
@@ -37,7 +31,6 @@ export const fetchRepositories = async (): Promise<Repository[]> => {
     throw new Error(`${(error as Error).message}`);
   } 
 };
-
 
 export const createRepository = async (repository: RepositoryPayload): Promise<Repository> => {
   try {

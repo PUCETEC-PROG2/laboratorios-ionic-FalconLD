@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonTextarea, IonTitle, IonToolbar, IonText } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonTextarea, IonTitle, IonToolbar, IonText, useIonToast } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { RepositoryPayload } from '../interfaces/RepositoryPayload';
 import './Tab2.css';
@@ -8,6 +8,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const Tab2: React.FC = () => {
   const history = useHistory();
+  const [presentToast] = useIonToast();
   const [repositoryData, setRepositoryData] = useState<RepositoryPayload>({
     name: "",
     description: ""
@@ -23,18 +24,20 @@ const Tab2: React.FC = () => {
     setLoading(true);
     setErrorMsg("");
     createRepository(repositoryData)
-      .then(() => history.push("/tab1"))
+      .then(() => {
+        setRepositoryData({ name: "", description: "" });
+        presentToast({
+          message: 'Repositorio creado correctamente',
+          duration: 2000,
+          color: 'success',
+          onDidDismiss: () => history.push("/tab1")
+        });
+      })
       .catch((error) => {
         const apiError = error instanceof Error ? error.message : String(error);
         setErrorMsg(`Error al crear el repositorio: ${apiError}`);
       })
-      .finally(() => 
-        setLoading(false));
-        setRepositoryData ({
-          name: "",
-          description: ""
-        })
-  
+      .finally(() => setLoading(false));
   };
 
   return (
