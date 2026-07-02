@@ -64,4 +64,20 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-dark-shade: #292929;
 	--ion-color-dark-tint: #444444;
 
+	--ion-color-celeste: #7EC8E3;
+	--ion-color-celeste-rgb: 126, 200, 227;
+	--ion-color-celeste-contrast: #0c4a6e;
+	--ion-color-celeste-contrast-rgb: 12, 74, 110;
+	--ion-color-celeste-shade: #6eb0c8;
+	--ion-color-celeste-tint: #8bcee6;
+
+}
+
+.ion-color-celeste {
+	--ion-color-base: var(--ion-color-celeste);
+	--ion-color-base-rgb: var(--ion-color-celeste-rgb);
+	--ion-color-contrast: var(--ion-color-celeste-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-celeste-contrast-rgb);
+	--ion-color-shade: var(--ion-color-celeste-shade);
+	--ion-color-tint: var(--ion-color-celeste-tint);
 }

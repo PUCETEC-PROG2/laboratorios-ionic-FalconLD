@@ -7,15 +7,21 @@ import {
   IonToolbar, 
   IonList,
   useIonViewWillEnter,
-  IonText
+  IonText,
+  useIonAlert,
+  useIonToast
 } from '@ionic/react';
+import { useHistory } from 'react-router-dom';
 import './Tab1.css';
 import { Repository } from '../interfaces/Repository';
 import RepoItem from '../components/RepoItem'; 
-import { fetchRepositories } from '../services/GitHubService';
+import { deleteRepository, fetchRepositories } from '../services/GitHubService';
 import LoadingSpinner from '../components/LoadingSpinner'; 
 
 const Tab1: React.FC = () => {
+  const history = useHistory();
+  const [presentAlert] = useIonAlert();
+  const [presentToast] = useIonToast();
   const [repositoryList, setRepositoryList] = React.useState<Repository[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
@@ -34,13 +40,53 @@ const Tab1: React.FC = () => {
       .finally(() => setLoading(false));
   };
 
+  const handleDelete = (repo: Repository) => {
+    presentAlert({
+      header: 'Confirmar eliminación',
+      message: `¿Deseas eliminar el repositorio "${repo.name}"?`,
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: () => {
+            setLoading(true);
+            setErrorMsg("");
+            deleteRepository(repo.owner.login, repo.name)
+              .then(() => {
+                presentToast({
+                  message: 'Repositorio eliminado correctamente',
+                  duration: 2000,
+                  position: 'top',
+                  positionAnchor: 'tab1-header',
+                  color: 'celeste'
+                });
+                return fetchRepositories();
+              })
+              .then((reposData) => setRepositoryList(reposData))
+              .catch((error) => {
+                console.error(error);
+                const apiError = error instanceof Error ? error.message : String(error);
+                setErrorMsg(`Error al eliminar el repositorio: ${apiError}`);
+              })
+              .finally(() => setLoading(false));
+          }
+        }
+      ]
+    });
+  };
+
+  const handleEdit = (repo: Repository) => {
+    history.push('/tab2', { mode: 'edit', repository: repo });
+  };
+
   useIonViewWillEnter(() => {
     loadRepos();
   });
 
   return (
     <IonPage>
-      <IonHeader> 
+      <IonHeader id="tab1-header">
         <IonToolbar>
           <IonTitle>Repositorios</IonTitle>
         </IonToolbar>
@@ -58,7 +104,12 @@ const Tab1: React.FC = () => {
         {!loading && repositoryList.length > 0 && (
           <IonList>
             {repositoryList.map((repo) => (
-              <RepoItem key={repo.name} {...repo} /> 
+              <RepoItem
+                key={repo.name}
+                {...repo}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+              /> 
             ))} 
           </IonList>
         )}

@@ -2,6 +2,7 @@ import axios from "axios";
 import { Repository } from "../interfaces/Repository";
 import { GithubUser } from "../interfaces/GithubUser";
 import { RepositoryPayload } from "../interfaces/RepositoryPayload";
+import { RepositoryUpdatePayload } from "../interfaces/RepositoryUpdatePayload";
 
 const GITHUB_API_URL = import.meta.env.VITE_GITHUB_API_URL || "https://api.github.com";
 const GITHUB_API_TOKEN = import.meta.env.VITE_GITHUB_API_TOKEN;
@@ -38,6 +39,29 @@ export const createRepository = async (repository: RepositoryPayload): Promise<R
     return response.data as Repository;
   } catch (error) {
     console.error("Error al agregar ", error);
+    throw new Error(`${(error as Error).message}`);
+  }
+};
+
+export const updateRepository = async (
+  owner: string,
+  repo: string,
+  repository: RepositoryUpdatePayload
+): Promise<Repository> => {
+  try {
+    const response = await githubClient.patch(`repos/${owner}/${repo}`, repository);
+    return response.data as Repository;
+  } catch (error) {
+    console.error("Error al actualizar ", error);
+    throw new Error(`${(error as Error).message}`);
+  }
+};
+
+export const deleteRepository = async (owner: string, repo: string): Promise<void> => {
+  try {
+    await githubClient.delete(`repos/${owner}/${repo}`);
+  } catch (error) {
+    console.error("Error al eliminar ", error);
     throw new Error(`${(error as Error).message}`);
   }
 };
